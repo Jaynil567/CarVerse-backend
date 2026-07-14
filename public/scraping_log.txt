@@ -1,0 +1,13 @@
+Starting live Selenium scraping crawler...
+C:\Python310\lib\site-packages\requests\__init__.py:113: RequestsDependencyWarning: urllib3 (2.7.0) or chardet (7.4.3)/charset_normalizer (3.4.4) doesn't match a supported version!
+  warnings.warn(
+Starting scraper script...
+Scraping pages 2 to 50
+==================================================
+Page 2... +24 new (Total: 24)
+Page 3... +25 new (Total: 49)
+Page 4... +13 new (Total: 62)
+Page 5... +23 new (Total: 85)
+Page 6... +22 new (Total: 107)
+Page 7... +24 new (Total: 131)
+Page 8... 
