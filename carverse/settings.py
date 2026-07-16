@@ -108,30 +108,15 @@ CLOUDINARY_CLOUD_NAME = os.environ.get('CLOUDINARY_CLOUD_NAME', '')
 CLOUDINARY_API_KEY = os.environ.get('CLOUDINARY_API_KEY', '')
 CLOUDINARY_API_SECRET = os.environ.get('CLOUDINARY_API_SECRET', '')
 
-CLOUDINARY_CONFIGURED = False
-if CLOUDINARY_CLOUD_NAME and CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET:
-    try:
-        import cloudinary
-        cloudinary.config(
-            cloud_name=CLOUDINARY_CLOUD_NAME,
-            api_key=CLOUDINARY_API_KEY,
-            api_secret=CLOUDINARY_API_SECRET
-        )
-        CLOUDINARY_CONFIGURED = True
-        print("Cloudinary successfully configured.")
-    except Exception as e:
-        print(f"Error configuring Cloudinary: {e}")
-else:
-    print("Cloudinary credentials not fully set. Falling back to local media storage.")
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 import cloudinary
 
 cloudinary.config(
-    cloud_name="YOUR_CLOUD_NAME",
-    api_key="YOUR_API_KEY",
-    api_secret="YOUR_API_SECRET",
+    cloud_name="dhdfk5yci",
+    api_key="788956439225433",
+    api_secret="0Yl0E6dW9YipjrJCfp49ac8-ktE",
     secure=True,
 )
 

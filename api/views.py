@@ -132,18 +132,45 @@ class CarViewSet(viewsets.ModelViewSet):
         img_url = "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80"
         
         # Check if an image is sent as a file
+        print("FILES:", self.request.FILES)
+        print("DATA:", self.request.data)
         if 'image_file' in self.request.FILES:
-            image_file = self.request.FILES['image_file']
-            
+            import traceback
             import cloudinary.uploader
+        
+            try:
+                image_file = self.request.FILES['image_file']
+        
+                print("===== FILE RECEIVED =====")
+                print(image_file.name)
+        
+                upload_result = cloudinary.uploader.upload(
+                    image_file,
+                    folder="carverse"
+                )
+        
+                print("===== CLOUDINARY RESPONSE =====")
+                print(upload_result)
+        
+                img_url = upload_result["secure_url"]
+        
+            except Exception as e:
+                import traceback
 
-            upload_result = cloudinary.uploader.upload(
-                image_file,
-                folder="carverse"
-            )
+                print("=" * 50)
+                print("CLOUDINARY ERROR")
+                print("=" * 50)
+                print(type(e))
+                print(str(e))
+                traceback.print_exc()
 
-            img_url = upload_result["secure_url"]
-            
+                return Response(
+                    {
+                        "error": str(e),
+                        "type": str(type(e))
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
         elif 'image' in self.request.data and self.request.data['image']:
             img_url = self.request.data['image']
 
