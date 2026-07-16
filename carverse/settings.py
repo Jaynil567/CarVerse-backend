@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-carverse-super-secret-key-for-college-project'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost", 
