@@ -135,17 +135,15 @@ class CarViewSet(viewsets.ModelViewSet):
         if 'image_file' in self.request.FILES:
             image_file = self.request.FILES['image_file']
             
-            if settings.CLOUDINARY_CONFIGURED:
-                import cloudinary.uploader
-                try:
-                    upload_result = cloudinary.uploader.upload(image_file)
-                    img_url = upload_result.get('secure_url')
-                    print(f"Uploaded to Cloudinary: {img_url}")
-                except Exception as e:
-                    print(f"Cloudinary upload error: {e}, falling back to local storage")
-                    img_url = self._save_local_file(image_file)
-            else:
-                img_url = self._save_local_file(image_file)
+            import cloudinary.uploader
+
+            upload_result = cloudinary.uploader.upload(
+                image_file,
+                folder="carverse"
+            )
+
+            img_url = upload_result["secure_url"]
+            
         elif 'image' in self.request.data and self.request.data['image']:
             img_url = self.request.data['image']
 
@@ -166,14 +164,7 @@ class CarViewSet(viewsets.ModelViewSet):
             model=model
         )
 
-    def _save_local_file(self, file_obj):
-        # Clean file name and save to local media root
-        filename = slugify(file_obj.name.split('.')[0]) + '.' + file_obj.name.split('.')[-1]
-        path = default_storage.save(f'car_images/{filename}', ContentFile(file_obj.read()))
-        # Build local URL (relative to root domain)
-        request = self.request
-        return f"{request.scheme}://{request.get_host()}/media/{path}"
-
+    
 # =====================================================================
 # MACHINE LEARNING PRICE PREDICTION
 # =====================================================================
