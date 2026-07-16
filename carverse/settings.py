@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     
     # Local apps
     'api.apps.ApiConfig',
+
+    "cloudinary",
+    "cloudinary_storage",
 ]
 
 MIDDLEWARE = [
@@ -122,3 +125,11 @@ else:
     print("Cloudinary credentials not fully set. Falling back to local media storage.")
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": "dhdfk5yci",
+    "API_KEY": "788956439225433",
+    "API_SECRET": "0Yl0E6dW9YipjrJCfp49ac8-ktE",
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
